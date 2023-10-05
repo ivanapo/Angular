@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 
 import { NgForm } from '@angular/forms';
-import { Router } from '@angular/router';
+
+import { AuthService } from './login.service';
 
 @Component({
   selector: 'app-login',
@@ -10,20 +11,14 @@ import { Router } from '@angular/router';
 export class LoginComponent {
 
 
-  constructor( private router: Router) {}
-  isLoggedIn: boolean = false;
+  constructor(private authService:AuthService) {}
+ 
 
-  login(f: NgForm) {
-
-    if (f.value.username === 'test' && f.value.password === 'pass') {
-      localStorage.setItem('currentUser', f.value.username);
-      this.isLoggedIn = true;
-      this.router.navigate(['/products']);
-      console.log('Login successful');
-    } else {
-      this.isLoggedIn = false;
-      console.log('Login failed');
-    }
+  login(f: NgForm) { 
+    
+    const username = f.value.username;
+    const password = f.value.password;
+    this.authService.login(username, password);
   }
 
  
