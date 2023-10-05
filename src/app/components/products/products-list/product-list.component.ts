@@ -1,7 +1,8 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
-import { IProduct } from "./product";
-import { ProductService } from "./product.service";
+import { IProduct } from "../../../interfaces/product";
+import { ProductService } from "../../../services/product.service";
 import { Subscription } from 'rxjs';
+import { AuthService } from "../../../services/login.service";
 
 @Component({
     templateUrl: './product-list.component.html',
@@ -13,9 +14,11 @@ export class ProductListComponent implements OnInit, OnDestroy {
     pageTitle: string = 'Product List!';
     imageWidth: number = 50;
     imageMargin: number = 2;
-    showImage: boolean = false;
+    showImage: boolean = true;
     errorMessage: string = '';
     sub!: Subscription;
+    isLoggedIn = false;
+
 
     private _listFilter: string = '';
     get listFilter(): string {
@@ -31,9 +34,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
     filteredPrducts: IProduct[] = [];
     products: IProduct[] = [];
 
-    constructor(private productService: ProductService) {
-
-    }
+    constructor(private productService: ProductService, private authService: AuthService) {}
 
 
     performFilter(filterBy: string): IProduct[] {
@@ -46,7 +47,6 @@ export class ProductListComponent implements OnInit, OnDestroy {
         this.showImage = !this.showImage;
     }
 
-
     ngOnInit(): void {
         this.sub = this.productService.getProducts().subscribe({
             next: products => {
@@ -55,6 +55,12 @@ export class ProductListComponent implements OnInit, OnDestroy {
             },
             error: err => this.errorMessage = err
         });
+
+        if(this.authService.logged()) {
+            this.isLoggedIn = true;
+            return;
+        } 
+        this.isLoggedIn = false;
     }
 
     ngOnDestroy(): void {

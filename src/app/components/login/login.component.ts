@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 import { NgForm } from '@angular/forms';
 
-import { AuthService } from './login.service';
+import { AuthService } from '../../services/login.service';
 
 @Component({
   selector: 'app-login',
@@ -20,7 +20,5 @@ export class LoginComponent {
     const password = f.value.password;
     this.authService.login(username, password);
   }
-
- 
-
+  
 }

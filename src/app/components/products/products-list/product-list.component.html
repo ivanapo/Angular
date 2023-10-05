@@ -28,6 +28,7 @@
             <th>Available</th>
             <th>Price</th>
             <th>5 Star Rating</th>
+            <th *ngIf="isLoggedIn">Edit button</th>
           </tr>
         </thead>
         <tbody>
@@ -48,9 +49,11 @@
             <td>{{ product.releaseDate }}</td>
             <td>{{ product.price | currency : "USD" : "symbol" : "1.2-2" }}</td>
             <td> <pm-star [rating]='product.starRating' (ratingClicked)='onRatingClicked($event)'></pm-star> </td>
+            <td><button *ngIf="isLoggedIn">Edit</button></td>
           </tr>
         </tbody>
       </table>
     </div>
   </div>
 </div>
+

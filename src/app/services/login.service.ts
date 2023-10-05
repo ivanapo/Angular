@@ -31,7 +31,7 @@ export class AuthService {
       this.storedUsername = ""; 
       this.isLoggedIn = false;
     }
-    
+  
   }
 
   logged(): boolean {

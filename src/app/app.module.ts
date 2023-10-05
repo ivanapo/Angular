@@ -1,19 +1,18 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ProductListComponent } from './products/product-list.component';
+import { ProductListComponent } from './components/products/products-list/product-list.component';
 import { FormsModule } from '@angular/forms';
-import { ConvertToSpaces } from './shared/convert-tospaces.pipe';
-import { StarComponent } from './shared/star.component';
+import { ConvertToSpaces } from './stars/convert-tospaces.pipe';
+import { StarComponent } from './stars/star.component';
 import { HttpClientModule } from  '@angular/common/http';
-import { ProductDetailComponent } from './products/product-detail.component';
-import { WelcomeComponent } from './home/welcome.component';
+import { ProductDetailComponent } from './components/products/product-details/product-detail.component';
+import { WelcomeComponent } from './components/home/welcome.component';
 import { RouterModule } from '@angular/router';
-import { ProductDetailGuard } from './products/product-detail.guard';
-import { LoginComponent } from './login/login.component';
-import { AuthService } from './login/login.service';
+import { ProductDetailGuard } from './guards/product-detail.guard';
+import { LoginComponent } from './components/login/login.component';
+
 
 
 
