@@ -6,9 +6,9 @@
           <li><a class='nav-link' routerLinkActive='active' routerLink='/products'>Product List</a></li>
       </ul>
       <div class="d-flex"> 
-        <p style="margin-right: 10px;" *ngIf="user != ''"> {{ user }}</p>
-          <a style="margin-right: 10px;" class='nav-link' routerLink='/welcome' (click)="logOut()">
-              {{ logged() ? "Log Out" : "Log In" }}
+        <p style="margin-right: 10px;" *ngIf="user!= ''"> {{ user }}</p>
+          <a style="margin-right: 10px;"  class='nav-link' routerLink='/welcome' (click)="logOut()">
+              {{ isLoggedIn ? "Log Out" : "Log In" }}
           </a>
       </div>
     </div>
@@ -17,3 +17,4 @@
       <div class='container'>
         <router-outlet></router-outlet>
       </div>
+    

@@ -4,7 +4,9 @@ import { ProductService } from "../../../services/product.service";
 import { Subscription } from 'rxjs';
 import { AuthService } from "../../../services/login.service";
 
+
 @Component({
+    selector: 'product-list',
     templateUrl: './product-list.component.html',
     styleUrls: ['./product-list.component.css']
 })
@@ -18,9 +20,12 @@ export class ProductListComponent implements OnInit, OnDestroy {
     errorMessage: string = '';
     sub!: Subscription;
     isLoggedIn = false;
+    productId: number;
+    canView: boolean = false;
 
 
     private _listFilter: string = '';
+    
     get listFilter(): string {
         return this._listFilter;
     }
@@ -34,7 +39,11 @@ export class ProductListComponent implements OnInit, OnDestroy {
     filteredPrducts: IProduct[] = [];
     products: IProduct[] = [];
 
-    constructor(private productService: ProductService, private authService: AuthService) {}
+    constructor(private productService: ProductService, private authService: AuthService) {
+        authService.CurentUser$.subscribe(user => {
+            this.isLoggedIn=user
+          });
+    }
 
 
     performFilter(filterBy: string): IProduct[] {
@@ -56,11 +65,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
             error: err => this.errorMessage = err
         });
 
-        if(this.authService.logged()) {
-            this.isLoggedIn = true;
-            return;
-        } 
-        this.isLoggedIn = false;
+    
     }
 
     ngOnDestroy(): void {
@@ -70,5 +75,12 @@ export class ProductListComponent implements OnInit, OnDestroy {
     onRatingClicked(message: string): void {
         this.pageTitle = ' Product List: ' + message;
     }
+
+
+    onViewClick(id: number): void{
+        this.canView = !this.canView;
+        this.productId = id;
+    }
+    
 }
 

@@ -12,6 +12,7 @@ import { WelcomeComponent } from './components/home/welcome.component';
 import { RouterModule } from '@angular/router';
 import { ProductDetailGuard } from './guards/product-detail.guard';
 import { LoginComponent } from './components/login/login.component';
+import { ProductsMoreComponent } from './components/products/products-more/products-more.component';
 
 
 
@@ -25,6 +26,7 @@ import { LoginComponent } from './components/login/login.component';
     ProductDetailComponent,
     WelcomeComponent,
     LoginComponent,
+    ProductsMoreComponent,
 
     
   ],
@@ -36,10 +38,16 @@ import { LoginComponent } from './components/login/login.component';
     HttpClientModule,
     RouterModule.forRoot([
       {path: 'products', component: ProductListComponent},
-
       {path: 'products/:id',
       canActivate: [ProductDetailGuard],
       component: ProductDetailComponent},
+      
+      
+      {path: 'more', children: [
+        {path: 'products/more/:id', component: ProductsMoreComponent}
+      ]},
+
+      
       {path: 'welcome', component: WelcomeComponent},
       {path: '', redirectTo: 'welcome', pathMatch: 'full'},
       {path: '**', redirectTo: 'welcome', pathMatch: 'full'}

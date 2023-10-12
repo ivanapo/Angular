@@ -10,17 +10,17 @@ import { AuthService } from './services/login.service';
 export class AppComponent {
   pageTitle: string = 'Angular Project';
   user = '';
-  constructor(private authService: AuthService) { }
+  isLoggedIn = false;
+  
+  constructor(private authService: AuthService) {
+    authService.CurentUser$.subscribe(user => {
+      this.isLoggedIn = user
+    });
+   }
 
-  logged(): boolean {
-    if(this.authService.logged()) {
-      this.user = localStorage.getItem('currentUser')!!;
-      return true;
-    } 
-    return false;
-  }
 
   logOut(): void {
+    
     this.user = '';
     this.authService.logOut();
   }

@@ -27,7 +27,7 @@
             <th>Code</th>
             <th>Available</th>
             <th>Price</th>
-            <th>5 Star Rating</th>
+            <th>Star Rating</th>
             <th *ngIf="isLoggedIn">Edit button</th>
           </tr>
         </thead>
@@ -48,8 +48,9 @@
             <td>{{ product.productCode | lowercase | convertToSpaces:'-' }}</td>
             <td>{{ product.releaseDate }}</td>
             <td>{{ product.price | currency : "USD" : "symbol" : "1.2-2" }}</td>
-            <td> <pm-star [rating]='product.starRating' (ratingClicked)='onRatingClicked($event)'></pm-star> </td>
-            <td><button *ngIf="isLoggedIn">Edit</button></td>
+            <td><pm-star [rating]='product.starRating' (ratingClicked)='onRatingClicked($event)'></pm-star></td>
+            <td><button  *ngIf="isLoggedIn" (click)="onViewClick(product.productId) ">View</button></td>
+            
           </tr>
         </tbody>
       </table>
@@ -57,3 +58,7 @@
   </div>
 </div>
 
+
+  
+
+<products-more *ngIf="canView" [idNumber]="productId"></products-more>

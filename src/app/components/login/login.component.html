@@ -2,8 +2,8 @@
     <div class="row">
       
       
-      <div class=".col-12 col-sm-8 col-md-6 m-auto">
-        <div class="card border-1 shadow">
+      <div class="col-12 col-sm-8 col-md-6 m-auto">
+        <div class="card border-2 shadow">
           <div class="card-body">
               <form #f="ngForm" (ngSubmit)="login(f)">
                 <input 
@@ -14,20 +14,15 @@
                 class="form-control my-3 py-2" 
                 placeholder="Username">
 
-               
                 <input 
                 type="password" 
                 name="password"  
                 ngModel required  
                 class="form-control my-3 py-2" 
                 placeholder="Password">
+
                 <i   class="bi bi-pencil-square"></i>
-                <!-- <p>Username: {{ f.value.username }}</p>
-                <p>Password: {{ f.value.password }}</p> -->
-                
-              
-                <div class=" d-flex justify-content-center mt-3">
-                <!-- <a href="#" class="nav-link">SignUp</a> -->
+                <div class=" d-flex justify-content-center mt-3">       
                 <button type="submit" class="btn btn-primary"> Log In</button>
               </div>
               </form>
